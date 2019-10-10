@@ -40,25 +40,27 @@ int main(void)
     /*DDRD &= ~_BV(BUTTON);*/
     GPIO_config_output(&DDRB, LED_PIN1);
     GPIO_config_output(&DDRB, LED_PIN);
+    GPIO_config_input_pullup(&DDRD, &PORTD, BUTTON);
 
     /* Turn LED off */
 
     /*PORTD |= _BV(BUTTON);*/ 
-     GPIO_write(&PORTB, LED_PIN1, 0);
-     GPIO_write(&PORTB, LED_PIN, 1);
+     GPIO_write(&PORTB, LED_PIN1, 1);
+     GPIO_write(&PORTB, LED_PIN, 0);
 
     /* Infinite loop */
   
     for (;;)
     {
-        /* Invert LED and delay */
-
-      GPIO_toggle(&PORTB, LED_PIN1);
-      GPIO_toggle(&PORTB, LED_PIN);
-    
-        _delay_ms(BLINK_DELAY);
+      /* Invert LED and delay */
+      //if (GPIO_read(&PIND, BUTTON) == 0)
       
-
+      if(bit_is_clear(PIND, BUTTON))
+      {
+        GPIO_toggle(&PORTB, LED_PIN1);
+        GPIO_toggle(&PORTB, LED_PIN);
+        _delay_ms(BLINK_DELAY);
+      }
     }
 
     return (0);
