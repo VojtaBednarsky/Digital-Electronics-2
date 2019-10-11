@@ -1,2 +1,6 @@
 # Digital-Electronics-2
-Programming in c
+University of technology Brno
+Electrotechnic and komunikation
+
+Programming in C
+Study harder, programing smart!
